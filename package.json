@@ -1,13 +1,16 @@
 {
-  "name": "react-jasmine-diff",
+  "name": "react-decompiler",
   "version": "0.0.1",
-  "description": "Better diff for react components testing",
+  "description": "Decompile react components back into jsx format",
   "main": "index.js",
   "scripts": {
     "test": "karma start karma.conf.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "Rogério Chaves",
+    "url": "https://github.com/rogeriochaves"
+  },
+  "license": "MIT",
   "devDependencies": {
     "babelify": "^6.3.0",
     "karma-babel-preprocessor": "^5.2.2",
