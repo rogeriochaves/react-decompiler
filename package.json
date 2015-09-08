@@ -17,6 +17,7 @@
     "phantomjs-polyfill": "0.0.1"
   },
   "dependencies": {
+    "js-beautify": "^1.5.10",
     "react": "^0.13.3"
   }
 }
