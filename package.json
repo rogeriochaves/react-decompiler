@@ -9,8 +9,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "grunt-karma": "*",
+    "babel": "^5.8.23",
+    "karma-babel-preprocessor": "^5.2.2",
     "karma-jasmine": "*",
-    "karma-phantomjs-launcher": "*"
+    "karma-phantomjs-launcher": "*",
+    "phantomjs-polyfill": "0.0.1"
+  },
+  "dependencies": {
+    "react": "^0.13.3"
   }
 }

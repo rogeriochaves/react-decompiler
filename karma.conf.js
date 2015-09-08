@@ -16,11 +16,13 @@ module.exports = function(config) {
   // testing framework to use (jasmine/mocha/qunit/...)
   // as well as any additional frameworks (requirejs/chai/sinon/...)
   frameworks: [
-    "jasmine"
+    'jasmine'
   ],
 
   // list of files / patterns to load in the browser
   files: [
+    'node_modules/phantomjs-polyfill/bind-polyfill.js',
+    'node_modules/react/dist/react-with-addons.js',
     'test/*.js'
   ],
 
@@ -40,14 +42,20 @@ module.exports = function(config) {
   // - PhantomJS
   // - IE (only Windows)
   browsers: [
-    "PhantomJS"
+    'PhantomJS'
   ],
 
   // Which plugins to enable
   plugins: [
-    "karma-phantomjs-launcher",
-    "karma-jasmine"
+    'karma-phantomjs-launcher',
+    'karma-jasmine',
+    'karma-babel-preprocessor'
   ],
+
+  preprocessors: {
+    'src/**/*.js': ['babel'],
+    'test/**/*.js': ['babel']
+  },
 
   // Continuous Integration mode
   // if true, it capture browsers, run tests and exit

@@ -1,5 +1,5 @@
 describe('first spec', function() {
-  it('checks if math works', function () {
-    expect(1 + 1).toBe(2);
+  it('checks if jsx works', function () {
+    expect(<div />).toEqual(jasmine.any(Object));
   });
 });
