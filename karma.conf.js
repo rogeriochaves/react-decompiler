@@ -16,13 +16,14 @@ module.exports = function(config) {
   // testing framework to use (jasmine/mocha/qunit/...)
   // as well as any additional frameworks (requirejs/chai/sinon/...)
   frameworks: [
+    'browserify',
     'jasmine'
   ],
 
   // list of files / patterns to load in the browser
   files: [
     'node_modules/phantomjs-polyfill/bind-polyfill.js',
-    'node_modules/react/dist/react-with-addons.js',
+    'src/*.js',
     'test/*.js'
   ],
 
@@ -49,12 +50,18 @@ module.exports = function(config) {
   plugins: [
     'karma-phantomjs-launcher',
     'karma-jasmine',
-    'karma-babel-preprocessor'
+    'karma-babel-preprocessor',
+    'karma-browserify',
+    'babelify'
   ],
 
   preprocessors: {
-    'src/**/*.js': ['babel'],
-    'test/**/*.js': ['babel']
+    'src/**/*.js': ['browserify'],
+    'test/**/*.js': ['browserify']
+  },
+
+  browserify: {
+    transform: ['babelify']
   },
 
   // Continuous Integration mode

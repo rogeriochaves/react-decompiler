@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel": "^5.8.23",
+    "babelify": "^6.3.0",
     "karma-babel-preprocessor": "^5.2.2",
+    "karma-browserify": "^4.3.0",
     "karma-jasmine": "*",
     "karma-phantomjs-launcher": "*",
     "phantomjs-polyfill": "0.0.1"
