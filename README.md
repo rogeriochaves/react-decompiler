@@ -15,7 +15,7 @@ let component = (<div>
 
 decompiler(component);
 
-// Outputs: <div><h1>Hello</h1></div>
+// Outputs: "<div><h1>Hello</h1></div>"
 ```
 
 You can also output it nicely formatted
@@ -28,7 +28,7 @@ let component = (<div>
 
 formatted(component);
 
-// Outputs: <div>
+// Outputs: "<div>
 //  <h1>Hello</h1>
-// </div>
+// </div>"
 ```
