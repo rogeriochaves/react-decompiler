@@ -1,0 +1,16 @@
+{
+  "name": "react-jasmine-diff",
+  "version": "0.0.1",
+  "description": "Better diff for react components testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt-karma": "*",
+    "karma-jasmine": "*",
+    "karma-phantomjs-launcher": "*"
+  }
+}
