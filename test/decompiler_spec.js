@@ -100,6 +100,9 @@ describe('decompiler', () => {
             <Foo />
           </td>
         </tr>
+        <tr>
+          <td>Foo Bar</td>
+        </tr>
       </table>
     </div>);
 
@@ -110,6 +113,9 @@ describe('decompiler', () => {
       <td>
         <Foo />
       </td>
+    </tr>
+    <tr>
+      <td>Foo Bar</td>
     </tr>
   </table>
 </div>`);
