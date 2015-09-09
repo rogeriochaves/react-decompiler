@@ -4,7 +4,8 @@
   "description": "Decompile react components back into jsx format",
   "main": "index.js",
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "node_modules/karma/bin/karma start karma.conf.js",
+    "install": "mkdir dist && node_modules/babel/bin/babel.js src/decompiler.js --out-file dist/decompiler.js"
   },
   "author": {
     "name": "Rogério Chaves",

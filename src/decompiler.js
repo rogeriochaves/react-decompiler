@@ -9,7 +9,7 @@ const getPropsKeys = component =>
   Object.keys(getProps(component)).filter(prop => prop !== 'children');
 
 const getComponentType = component =>
-  component.type.name ? component.type.name : component.type
+  component.type.name ? component.type.name : component.type;
 
 const appendStringifiedProp = component => (accumulated, prop) =>
   `${accumulated} ${prop}="${getProps(component)[prop]}"`;
@@ -30,8 +30,8 @@ const stringifyItem = item =>
   React.addons.TestUtils.isElement(item) ? stringifyComponent(item) : item.toString();
 
 const stringifyItems = components =>
-  [].concat(components).map(stringifyItem).join('')
+  [].concat(components).map(stringifyItem).join('');
 
-export default stringifyItems;
+export const decompile = stringifyItems;
 
 export const formatted = (items) => htmlBeautify(stringifyItems(items), { indent_size: 2 });

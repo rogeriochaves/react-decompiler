@@ -7,13 +7,13 @@ Install react-decompiler
 
 Use it
 ```javascript
-import decompiler from 'react-decompiler';
+import {decompile} from 'react-decompiler';
 
 let component = (<div>
     <h1>Hello</h1>
 </div>);
 
-decompiler(component);
+decompile(component);
 
 // Outputs: "<div><h1>Hello</h1></div>"
 ```
