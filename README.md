@@ -32,3 +32,5 @@ formatted(component);
 //  <h1>Hello</h1>
 // </div>"
 ```
+
+See more examples on the [test file](https://github.com/rogeriochaves/react-decompiler/blob/master/test/decompiler_spec.js)
