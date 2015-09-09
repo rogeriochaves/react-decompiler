@@ -1,9 +1,11 @@
-# react-decompiler
+# react-decompiler ![build-status](https://snap-ci.com/rogeriochaves/react-decompiler/branch/master/build_image.svg)
 
 Decompiles react components back into jsx strings.
 
 Install react-decompiler
-`npm install react-decompiler`
+```
+npm install react-decompiler
+```
 
 Use it
 ```javascript
