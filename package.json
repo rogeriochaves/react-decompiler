@@ -2,6 +2,10 @@
   "name": "react-decompiler",
   "version": "0.0.1",
   "description": "Decompile react components back into jsx format",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/rogeriochaves/react-decompiler.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "node_modules/karma/bin/karma start karma.conf.js",
