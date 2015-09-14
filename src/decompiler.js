@@ -8,8 +8,11 @@ const getChildren = component => getProps(component).children;
 const getPropsKeys = component =>
   Object.keys(getProps(component)).filter(prop => prop !== 'children');
 
+const getComponentName = component =>
+  component.type.displayName || component.type.name;
+
 const getComponentType = component =>
-  component.type.name ? component.type.name : component.type;
+  getComponentName(component) || component.type;
 
 const appendStringifiedProp = component => (accumulated, prop) =>
   `${accumulated} ${prop}="${getProps(component)[prop]}"`;

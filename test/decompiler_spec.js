@@ -73,22 +73,38 @@ describe('decompiler', () => {
     expect(decompile(component)).toBe('<div><Foo /><span><Foo>5</Foo></span></div>');
   });
 
-  it('stringify components rendered with shallow rendering', () => {
-    let renderer = React.addons.TestUtils.createRenderer();
-    renderer.render(<Foo />);
+  describe('shallow rendering', () => {
+    let renderer;
 
-    let output = renderer.getRenderOutput();
+    beforeEach(() => renderer = React.addons.TestUtils.createRenderer());
 
-    expect(decompile(output)).toBe('<span><div><span><div>Something</div></span></div></span>');
-  });
+    it('stringify components rendered', () => {
+      renderer.render(<Foo />);
 
-  it('stringify only first level components with shallow rendering', () => {
-    let renderer = React.addons.TestUtils.createRenderer();
-    renderer.render(<div><Foo /></div>);
+      let output = renderer.getRenderOutput();
 
-    let output = renderer.getRenderOutput();
+      expect(decompile(output)).toBe('<span><div><span><div>Something</div></span></div></span>');
+    });
 
-    expect(decompile(output)).toBe('<div><Foo /></div>');
+    it('stringify only first level components', () => {
+      renderer.render(<div><Foo /></div>);
+
+      let output = renderer.getRenderOutput();
+
+      expect(decompile(output)).toBe('<div><Foo /></div>');
+    });
+
+    it('stringify components with the createClass syntax rendered', () => {
+      let Bar = React.createClass({
+        render: () => <div>Bar</div>
+      });
+
+      renderer.render(<div><Bar /></div>);
+
+      let output = renderer.getRenderOutput();
+
+      expect(decompile(output)).toBe('<div><Bar /></div>');
+    });
   });
 
   it('outputs formatted html', () => {
