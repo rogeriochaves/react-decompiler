@@ -136,4 +136,39 @@ describe('decompiler', () => {
   </table>
 </div>`);
   });
+
+  it('stringify components on props correctly', () => {
+    let component = <div something={<Foo />} />;
+
+    expect(decompile(component)).toBe('<div something="<Foo />" />');
+  });
+
+  it('stringify functions on props without their contents', () => {
+    function callback (args) {
+      doSomeStuff();
+    }
+    let component = <div callback={callback} />;
+
+    expect(decompile(component)).toBe('<div callback="function callback(args){ ... }" />');
+  });
+
+  it('stringify objects', () => {
+    let obj = {foo: 'bar', baz: function qux () { doSomeStuff(); } };
+    obj.self = obj;
+    let component = <div something={obj} />;
+
+    expect(decompile(component)).toBe(`<div something="{ foo: 'bar', baz: function qux() {doSomeStuff();}, self: "[Circular]"}" />`);
+  });
+
+  it('stringify array', () => {
+    let component = <div something={[1, 'x', {a: 'b'}]} />;
+
+    expect(decompile(component)).toBe(`<div something="[ 1, 'x', {a: 'b' }]" />`);
+  });
+
+  it('stringify numbers', () => {
+    let component = <div value={124.5} />;
+
+    expect(decompile(component)).toBe(`<div value="124.5" />`);
+  });
 });

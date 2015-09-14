@@ -1,10 +1,10 @@
 {
   "name": "react-decompiler",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Decompile react components back into jsx format",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/rogeriochaves/react-decompiler.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rogeriochaves/react-decompiler.git"
   },
   "main": "index.js",
   "scripts": {
@@ -29,7 +29,8 @@
     "phantomjs-polyfill": "0.0.1"
   },
   "dependencies": {
-    "js-beautify": "^1.5.10"
+    "js-beautify": "^1.5.10",
+    "stringify-object": "^2.3.0"
   },
   "peerDependencies": {
     "react": "^0.13.3"

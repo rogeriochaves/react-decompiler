@@ -1,5 +1,6 @@
 import React from 'react/addons';
 import {html as htmlBeautify} from 'js-beautify';
+import stringifyObject from 'stringify-object';
 
 const getProps = component => component._store.originalProps;
 
@@ -14,8 +15,11 @@ const getComponentName = component =>
 const getComponentType = component =>
   getComponentName(component) || component.type;
 
+const getComponentProp = (component, prop) =>
+  stringifyItem(getProps(component)[prop])
+
 const appendStringifiedProp = component => (accumulated, prop) =>
-  `${accumulated} ${prop}="${getProps(component)[prop]}"`;
+  `${accumulated} ${prop}="${getComponentProp(component, prop)}"`;
 
 const stringifyProps = component =>
   getPropsKeys(component).reduce(appendStringifiedProp(component), '');
@@ -29,8 +33,19 @@ const stringifySimpleComponent = component =>
 const stringifyComponent = component =>
   getChildren(component) ? stringifyComposedComponent(component) : stringifySimpleComponent(component);
 
+const stringifyFunction = value =>
+  value.toString().replace(/ {[\s\S]*/, '{ ... }')
+
+const stringifyValue = value => {
+  switch (typeof value) {
+    case 'function': return stringifyFunction(value);
+    case 'object': return stringifyObject(value, {indent: ' '}).replace(/\n|  /g, '');
+    default: return value.toString();
+  }
+}
+
 const stringifyItem = item =>
-  React.addons.TestUtils.isElement(item) ? stringifyComponent(item) : item.toString();
+  React.addons.TestUtils.isElement(item) ? stringifyComponent(item) : stringifyValue(item);
 
 const stringifyItems = components =>
   [].concat(components).map(stringifyItem).join('');
