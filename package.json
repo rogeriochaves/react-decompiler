@@ -1,6 +1,6 @@
 {
   "name": "react-decompiler",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Decompile react components back into jsx format",
   "repository": {
     "type": "git",
