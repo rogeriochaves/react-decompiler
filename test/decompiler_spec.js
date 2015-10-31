@@ -32,7 +32,7 @@ describe('decompiler', () => {
   it('stringify a simple component with interpolated props', () => {
     let component = <div qux={1 + 1} />;
 
-    expect(decompile(component)).toBe('<div qux="2" />');
+    expect(decompile(component)).toBe('<div qux={2} />');
   });
 
   it('stringify composed components', () => {
@@ -140,7 +140,7 @@ describe('decompiler', () => {
   it('stringify components on props correctly', () => {
     let component = <div something={<Foo />} />;
 
-    expect(decompile(component)).toBe('<div something="<Foo />" />');
+    expect(decompile(component)).toBe('<div something={<Foo />} />');
   });
 
   it('stringify functions on props without their contents', () => {
@@ -149,7 +149,7 @@ describe('decompiler', () => {
     }
     let component = <div callback={callback} />;
 
-    expect(decompile(component)).toBe('<div callback="function callback(args){ ... }" />');
+    expect(decompile(component)).toBe('<div callback={function callback(args){ ... }} />');
   });
 
   it('stringify objects', () => {
@@ -157,19 +157,19 @@ describe('decompiler', () => {
     obj.self = obj;
     let component = <div something={obj} />;
 
-    expect(decompile(component)).toBe(`<div something="{ foo: 'bar', baz: function qux() {doSomeStuff();}, self: "[Circular]"}" />`);
+    expect(decompile(component)).toBe(`<div something={{ foo: 'bar', baz: function qux() {doSomeStuff();}, self: "[Circular]"}} />`);
   });
 
   it('stringify array', () => {
     let component = <div something={[1, 'x', {a: 'b'}]} />;
 
-    expect(decompile(component)).toBe(`<div something="[ 1, 'x', {a: 'b' }]" />`);
+    expect(decompile(component)).toBe(`<div something={[ 1, 'x', {a: 'b' }]} />`);
   });
 
   it('stringify numbers', () => {
     let component = <div value={124.5} />;
 
-    expect(decompile(component)).toBe(`<div value="124.5" />`);
+    expect(decompile(component)).toBe(`<div value={124.5} />`);
   });
 
   it('stringify key prop', () => {

@@ -26,11 +26,17 @@ const getComponentName = component =>
 const getComponentType = component =>
   getComponentName(component) || component.type;
 
+const getPropValue = (component, prop) =>
+  getProps(component)[prop];
+
+const getFormatedPropValue = (propValue) =>
+  typeof propValue === 'string' ? `"${stringifyItem(propValue)}"` : `{${stringifyItem(propValue)}}`;
+
 const getComponentProp = (component, prop) =>
-  stringifyItem(getProps(component)[prop])
+  getFormatedPropValue(getPropValue(component, prop));
 
 const appendStringifiedProp = component => (accumulated, prop) =>
-  `${accumulated} ${prop}="${getComponentProp(component, prop)}"`;
+  `${accumulated} ${prop}=${getComponentProp(component, prop)}`;
 
 const stringifyProps = component =>
   getPropsKeys(component).reduce(appendStringifiedProp(component), '');
@@ -55,8 +61,10 @@ const stringifyValue = value => {
   }
 }
 
+const isReact = React.addons.TestUtils.isElement;
+
 const stringifyItem = item =>
-  React.addons.TestUtils.isElement(item) ? stringifyComponent(item) : stringifyValue(item);
+  isReact(item) ? stringifyComponent(item) : stringifyValue(item);
 
 const stringifyItems = components =>
   [].concat(components).map(stringifyItem).join('');
