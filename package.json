@@ -26,7 +26,8 @@
     "karma-jasmine": "*",
     "karma-phantomjs-launcher": "*",
     "phantomjs": "^1.9.18",
-    "phantomjs-polyfill": "0.0.1"
+    "phantomjs-polyfill": "0.0.1",
+    "react": "^0.13.3"
   },
   "dependencies": {
     "is-plain-obj": "^1.0.0",
