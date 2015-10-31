@@ -1,4 +1,4 @@
-# react-decompiler ![build-status](https://snap-ci.com/rogeriochaves/react-decompiler/branch/master/build_image.svg)
+# react-decompiler [![build-status](https://snap-ci.com/rogeriochaves/react-decompiler/branch/master/build_image.svg)](https://snap-ci.com/rogeriochaves/react-decompiler/branch/master)
 
 Decompiles react components back into jsx strings.
 
