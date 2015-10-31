@@ -1,6 +1,6 @@
 import React from 'react/addons';
 import {html as htmlBeautify} from 'js-beautify';
-import stringifyObject from 'stringify-object';
+import stringifyObject from './stringify-object';
 import merge from 'object-assign';
 
 const getProps = component =>

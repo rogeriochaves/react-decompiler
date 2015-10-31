@@ -188,4 +188,10 @@ describe('decompiler', () => {
 
     expect(decompile(component)).toBe(`<div ref="foo" />`);
   });
+
+  it('stringify react elements inside plain old javascript objects', () => {
+    let component = <div foo={[<span />, <div />]} />;
+
+    expect(decompile(component)).toBe(`<div foo={[ <span />, <div />]} />`);
+  });
 });

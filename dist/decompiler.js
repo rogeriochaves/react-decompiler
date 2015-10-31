@@ -14,7 +14,7 @@ var _reactAddons2 = _interopRequireDefault(_reactAddons);
 
 var _jsBeautify = require('js-beautify');
 
-var _stringifyObject = require('stringify-object');
+var _stringifyObject = require('./stringify-object');
 
 var _stringifyObject2 = _interopRequireDefault(_stringifyObject);
 
@@ -48,13 +48,21 @@ var getComponentType = function getComponentType(component) {
   return getComponentName(component) || component.type;
 };
 
+var getPropValue = function getPropValue(component, prop) {
+  return getProps(component)[prop];
+};
+
+var getFormatedPropValue = function getFormatedPropValue(propValue) {
+  return typeof propValue === 'string' ? '"' + stringifyItem(propValue) + '"' : '{' + stringifyItem(propValue) + '}';
+};
+
 var getComponentProp = function getComponentProp(component, prop) {
-  return stringifyItem(getProps(component)[prop]);
+  return getFormatedPropValue(getPropValue(component, prop));
 };
 
 var appendStringifiedProp = function appendStringifiedProp(component) {
   return function (accumulated, prop) {
-    return accumulated + ' ' + prop + '="' + getComponentProp(component, prop) + '"';
+    return accumulated + ' ' + prop + '=' + getComponentProp(component, prop);
   };
 };
 
@@ -89,8 +97,10 @@ var stringifyValue = function stringifyValue(value) {
   }
 };
 
+var isReact = _reactAddons2['default'].addons.TestUtils.isElement;
+
 var stringifyItem = function stringifyItem(item) {
-  return _reactAddons2['default'].addons.TestUtils.isElement(item) ? stringifyComponent(item) : stringifyValue(item);
+  return isReact(item) ? stringifyComponent(item) : stringifyValue(item);
 };
 
 var stringifyItems = function stringifyItems(components) {
