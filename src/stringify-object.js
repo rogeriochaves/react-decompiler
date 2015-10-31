@@ -1,5 +1,5 @@
 /* this is an monkey-patched copy of https://github.com/yeoman/stringify-object/blob/master/index.js */
-import React from 'react/addons';
+import {isElement as isReact} from 'react-addons-test-utils';
 import {decompile} from './decompiler';
 
 var isRegexp = require('is-regexp');
@@ -14,7 +14,7 @@ module.exports = function (val, opts, pad) {
     pad = pad || '';
 
     /* monkey-patch do */
-    if (React.addons.TestUtils.isElement(val)) {
+    if (isReact(val)) {
       return decompile(val);
     }
     /* end */

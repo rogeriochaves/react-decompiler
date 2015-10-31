@@ -1,15 +1,15 @@
-import React from 'react/addons';
+import {isElement as isReact} from 'react-addons-test-utils';
 import {html as htmlBeautify} from 'js-beautify';
 import stringifyObject from './stringify-object';
 import merge from 'object-assign';
 
 const getProps = component =>
   merge(
-    component._store.originalProps,
     merge(
       getAttribute('key', component),
       getAttribute('ref', component)
-    )
+    ),
+    component.props
   );
 
 const getAttribute = (attribute, component) =>
@@ -60,8 +60,6 @@ const stringifyValue = value => {
     default: return value.toString();
   }
 }
-
-const isReact = React.addons.TestUtils.isElement;
 
 const stringifyItem = item =>
   isReact(item) ? stringifyComponent(item) : stringifyValue(item);

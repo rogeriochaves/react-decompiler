@@ -1,11 +1,7 @@
 /* this is an monkey-patched copy of https://github.com/yeoman/stringify-object/blob/master/index.js */
 'use strict';
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _reactAddons = require('react/addons');
-
-var _reactAddons2 = _interopRequireDefault(_reactAddons);
+var _reactAddonsTestUtils = require('react-addons-test-utils');
 
 var _decompiler = require('./decompiler');
 
@@ -21,7 +17,7 @@ module.exports = function (val, opts, pad) {
     pad = pad || '';
 
     /* monkey-patch do */
-    if (_reactAddons2['default'].addons.TestUtils.isElement(val)) {
+    if ((0, _reactAddonsTestUtils.isElement)(val)) {
       return (0, _decompiler.decompile)(val);
     }
     /* end */

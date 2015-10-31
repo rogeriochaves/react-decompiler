@@ -1,6 +1,6 @@
 {
   "name": "react-decompiler",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Decompile react components back into jsx format",
   "repository": {
     "type": "git",
@@ -27,15 +27,13 @@
     "karma-phantomjs-launcher": "*",
     "phantomjs": "^1.9.18",
     "phantomjs-polyfill": "0.0.1",
-    "react": "^0.13.3"
+    "react": "^0.14.1"
   },
   "dependencies": {
     "is-plain-obj": "^1.0.0",
     "is-regexp": "^1.0.0",
     "js-beautify": "^1.5.10",
-    "object-assign": "^4.0.1"
-  },
-  "peerDependencies": {
-    "react": "^0.13.3"
+    "object-assign": "^4.0.1",
+    "react-addons-test-utils": "^0.14.1"
   }
 }

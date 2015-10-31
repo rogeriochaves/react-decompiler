@@ -8,9 +8,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _reactAddons = require('react/addons');
-
-var _reactAddons2 = _interopRequireDefault(_reactAddons);
+var _reactAddonsTestUtils = require('react-addons-test-utils');
 
 var _jsBeautify = require('js-beautify');
 
@@ -23,7 +21,7 @@ var _objectAssign = require('object-assign');
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 var getProps = function getProps(component) {
-  return (0, _objectAssign2['default'])(component._store.originalProps, (0, _objectAssign2['default'])(getAttribute('key', component), getAttribute('ref', component)));
+  return (0, _objectAssign2['default'])((0, _objectAssign2['default'])(getAttribute('key', component), getAttribute('ref', component)), component.props);
 };
 
 var getAttribute = function getAttribute(attribute, component) {
@@ -97,10 +95,8 @@ var stringifyValue = function stringifyValue(value) {
   }
 };
 
-var isReact = _reactAddons2['default'].addons.TestUtils.isElement;
-
 var stringifyItem = function stringifyItem(item) {
-  return isReact(item) ? stringifyComponent(item) : stringifyValue(item);
+  return (0, _reactAddonsTestUtils.isElement)(item) ? stringifyComponent(item) : stringifyValue(item);
 };
 
 var stringifyItems = function stringifyItems(components) {

@@ -1,4 +1,5 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactTestUtils from 'react-addons-test-utils';
 import {decompile, formatted} from 'decompiler';
 
 describe('decompiler', () => {
@@ -76,7 +77,7 @@ describe('decompiler', () => {
   describe('shallow rendering', () => {
     let renderer;
 
-    beforeEach(() => renderer = React.addons.TestUtils.createRenderer());
+    beforeEach(() => renderer = ReactTestUtils.createRenderer());
 
     it('stringify components rendered', () => {
       renderer.render(<Foo />);
@@ -87,11 +88,15 @@ describe('decompiler', () => {
     });
 
     it('stringify only first level components', () => {
-      renderer.render(<div><Foo /></div>);
+      let Bar = React.createClass({
+        render: () => <Foo />
+      });
+
+      renderer.render(<Bar />);
 
       let output = renderer.getRenderOutput();
 
-      expect(decompile(output)).toBe('<div><Foo /></div>');
+      expect(decompile(output)).toBe('<Foo />');
     });
 
     it('stringify components with the createClass syntax rendered', () => {
@@ -99,11 +104,11 @@ describe('decompiler', () => {
         render: () => <div>Bar</div>
       });
 
-      renderer.render(<div><Bar /></div>);
+      renderer.render(<Bar />);
 
       let output = renderer.getRenderOutput();
 
-      expect(decompile(output)).toBe('<div><Bar /></div>');
+      expect(decompile(output)).toBe('<div>Bar</div>');
     });
   });
 
@@ -175,12 +180,12 @@ describe('decompiler', () => {
   it('stringify key prop', () => {
     let component = (
       <ul>
-        <li key="1">a</li>
+        <li key="1" foo="bar">a</li>
         <li key="2">b</li>
       </ul>
     );
 
-    expect(decompile(component)).toBe(`<ul><li key="1">a</li><li key="2">b</li></ul>`);
+    expect(decompile(component)).toBe(`<ul><li key="1" foo="bar">a</li><li key="2">b</li></ul>`);
   });
 
   it('stringify ref prop', () => {
