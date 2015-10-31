@@ -1,6 +1,6 @@
 {
   "name": "react-decompiler",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Decompile react components back into jsx format",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/karma/bin/karma start karma.conf.js",
-    "prepublish": "mkdir dist; node_modules/babel/bin/babel.js src/decompiler.js --out-file dist/decompiler.js"
+    "prepublish": "mkdir dist; node_modules/babel/bin/babel.js src/decompiler.js --out-file dist/decompiler.js; node_modules/babel/bin/babel.js src/stringify-object.js --out-file dist/stringify-object.js"
   },
   "author": {
     "name": "Rogério Chaves",
