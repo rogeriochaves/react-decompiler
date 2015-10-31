@@ -4,10 +4,16 @@ import stringifyObject from 'stringify-object';
 import merge from 'object-assign';
 
 const getProps = component =>
-  merge(component._store.originalProps, getKey(component));
+  merge(
+    component._store.originalProps,
+    merge(
+      getAttribute('key', component),
+      getAttribute('ref', component)
+    )
+  );
 
-const getKey = component =>
-  component.key ? {key: component.key} : {};
+const getAttribute = (attribute, component) =>
+  component[attribute] ? {[attribute]: component[attribute]} : {};
 
 const getChildren = component => getProps(component).children;
 

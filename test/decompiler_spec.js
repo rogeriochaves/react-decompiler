@@ -182,4 +182,10 @@ describe('decompiler', () => {
 
     expect(decompile(component)).toBe(`<ul><li key="1">a</li><li key="2">b</li></ul>`);
   });
+
+  it('stringify ref prop', () => {
+    let component = <div ref="foo" />;
+
+    expect(decompile(component)).toBe(`<div ref="foo" />`);
+  });
 });

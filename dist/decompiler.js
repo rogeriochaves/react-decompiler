@@ -6,6 +6,8 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _reactAddons = require('react/addons');
 
 var _reactAddons2 = _interopRequireDefault(_reactAddons);
@@ -21,11 +23,11 @@ var _objectAssign = require('object-assign');
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 var getProps = function getProps(component) {
-  return (0, _objectAssign2['default'])(component._store.originalProps, getKey(component));
+  return (0, _objectAssign2['default'])(component._store.originalProps, (0, _objectAssign2['default'])(getAttribute('key', component), getAttribute('ref', component)));
 };
 
-var getKey = function getKey(component) {
-  return component.key ? { key: component.key } : {};
+var getAttribute = function getAttribute(attribute, component) {
+  return component[attribute] ? _defineProperty({}, attribute, component[attribute]) : {};
 };
 
 var getChildren = function getChildren(component) {
