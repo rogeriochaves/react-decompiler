@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "js-beautify": "^1.5.10",
+    "object-assign": "^4.0.1",
     "stringify-object": "^2.3.0"
   },
   "peerDependencies": {

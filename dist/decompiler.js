@@ -12,8 +12,20 @@ var _reactAddons2 = _interopRequireDefault(_reactAddons);
 
 var _jsBeautify = require('js-beautify');
 
+var _stringifyObject = require('stringify-object');
+
+var _stringifyObject2 = _interopRequireDefault(_stringifyObject);
+
+var _objectAssign = require('object-assign');
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
 var getProps = function getProps(component) {
-  return component._store.originalProps;
+  return (0, _objectAssign2['default'])(component._store.originalProps, getKey(component));
+};
+
+var getKey = function getKey(component) {
+  return component.key ? { key: component.key } : {};
 };
 
 var getChildren = function getChildren(component) {
@@ -26,13 +38,21 @@ var getPropsKeys = function getPropsKeys(component) {
   });
 };
 
+var getComponentName = function getComponentName(component) {
+  return component.type.displayName || component.type.name;
+};
+
 var getComponentType = function getComponentType(component) {
-  return component.type.name ? component.type.name : component.type;
+  return getComponentName(component) || component.type;
+};
+
+var getComponentProp = function getComponentProp(component, prop) {
+  return stringifyItem(getProps(component)[prop]);
 };
 
 var appendStringifiedProp = function appendStringifiedProp(component) {
   return function (accumulated, prop) {
-    return accumulated + ' ' + prop + '="' + getProps(component)[prop] + '"';
+    return accumulated + ' ' + prop + '="' + getComponentProp(component, prop) + '"';
   };
 };
 
@@ -52,8 +72,23 @@ var stringifyComponent = function stringifyComponent(component) {
   return getChildren(component) ? stringifyComposedComponent(component) : stringifySimpleComponent(component);
 };
 
+var stringifyFunction = function stringifyFunction(value) {
+  return value.toString().replace(/ {[\s\S]*/, '{ ... }');
+};
+
+var stringifyValue = function stringifyValue(value) {
+  switch (typeof value) {
+    case 'function':
+      return stringifyFunction(value);
+    case 'object':
+      return (0, _stringifyObject2['default'])(value, { indent: ' ' }).replace(/\n|  /g, '');
+    default:
+      return value.toString();
+  }
+};
+
 var stringifyItem = function stringifyItem(item) {
-  return _reactAddons2['default'].addons.TestUtils.isElement(item) ? stringifyComponent(item) : item.toString();
+  return _reactAddons2['default'].addons.TestUtils.isElement(item) ? stringifyComponent(item) : stringifyValue(item);
 };
 
 var stringifyItems = function stringifyItems(components) {

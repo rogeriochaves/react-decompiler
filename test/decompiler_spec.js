@@ -171,4 +171,15 @@ describe('decompiler', () => {
 
     expect(decompile(component)).toBe(`<div value="124.5" />`);
   });
+
+  it('stringify key prop', () => {
+    let component = (
+      <ul>
+        <li key="1">a</li>
+        <li key="2">b</li>
+      </ul>
+    );
+
+    expect(decompile(component)).toBe(`<ul><li key="1">a</li><li key="2">b</li></ul>`);
+  });
 });

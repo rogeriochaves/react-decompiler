@@ -1,8 +1,13 @@
 import React from 'react/addons';
 import {html as htmlBeautify} from 'js-beautify';
 import stringifyObject from 'stringify-object';
+import merge from 'object-assign';
 
-const getProps = component => component._store.originalProps;
+const getProps = component =>
+  merge(component._store.originalProps, getKey(component));
+
+const getKey = component =>
+  component.key ? {key: component.key} : {};
 
 const getChildren = component => getProps(component).children;
 
