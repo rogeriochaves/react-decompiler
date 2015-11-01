@@ -157,6 +157,12 @@ describe('decompiler', () => {
     expect(decompile(component)).toBe('<div callback={function callback(args){ ... }} />');
   });
 
+  it('stringify unnamed functions', () => {
+    let component = <div callback={() => foo} />;
+
+    expect(decompile(component)).toBe('<div callback={function (){ ... }} />');
+  });
+
   it('stringify objects', () => {
     let obj = {foo: 'bar', baz: function qux () { doSomeStuff(); } };
     obj.self = obj;
@@ -177,10 +183,40 @@ describe('decompiler', () => {
     expect(decompile(component)).toBe(`<div value={124.5} />`);
   });
 
+  it('stringify null', () => {
+    let component = <div value={null} />;
+
+    expect(decompile(component)).toBe(`<div value={null} />`);
+  });
+
   it('stringify undefined', () => {
     let component = <div value={undefined} />;
 
     expect(decompile(component)).toBe(`<div value={undefined} />`);
+  });
+
+  it('stringify empty string', () => {
+    let component = <div value={[]} />;
+
+    expect(decompile(component)).toBe(`<div value={[]} />`);
+  });
+
+  it('stringify empty object', () => {
+    let component = <div value={{}} />;
+
+    expect(decompile(component)).toBe(`<div value={{}} />`);
+  });
+
+  it('stringify regex', () => {
+    let component = <div value={/abc/} />;
+
+    expect(decompile(component)).toBe(`<div value={/abc/} />`);
+  });
+
+  it('stringify nested objects', () => {
+    let component = <div a={{b: {c: {d: <div />, e: null}}}} />;
+
+    expect(decompile(component)).toBe(`<div a={{ b: {c: { d: <div />, e: null} }}} />`);
   });
 
   it('stringify key prop', () => {
