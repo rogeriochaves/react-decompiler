@@ -177,6 +177,12 @@ describe('decompiler', () => {
     expect(decompile(component)).toBe(`<div value={124.5} />`);
   });
 
+  it('stringify undefined', () => {
+    let component = <div value={undefined} />;
+
+    expect(decompile(component)).toBe(`<div value={undefined} />`);
+  });
+
   it('stringify key prop', () => {
     let component = (
       <ul>
