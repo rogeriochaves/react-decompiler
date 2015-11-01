@@ -90,6 +90,8 @@ var stringifyValue = function stringifyValue(value) {
       return stringifyFunction(value);
     case 'object':
       return (0, _stringifyObject2['default'])(value, { indent: ' ' }).replace(/\n|  /g, '');
+    case 'undefined':
+      return 'undefined';
     default:
       return value.toString();
   }
