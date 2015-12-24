@@ -35,4 +35,6 @@ formatted(component);
 // </div>"
 ```
 
+To minimize output, you can ignore the default props like this `decompile(withoutDefaultProps(<Foo />));`
+
 See more examples on the [test file](https://github.com/rogeriochaves/react-decompiler/blob/master/test/decompiler_spec.js)
