@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
-import {decompile, formatted} from 'decompiler';
+import {decompile, formatted, withoutDefaultProps} from 'decompiler';
 
 describe('decompiler', () => {
 
@@ -240,5 +240,41 @@ describe('decompiler', () => {
     let component = <div foo={[<span />, <div />]} />;
 
     expect(decompile(component)).toBe(`<div foo={[ <span />, <div />]} />`);
+  });
+
+  it('stringify should strip out props that have default values', () => {
+    let Bar = React.createClass({
+      propTypes: {
+        baz: React.PropTypes.number
+      },
+
+      getDefaultProps () {
+        return { baz: 456 };
+      },
+
+      render () {
+        return <span>Bar</span>;
+      }
+    });
+
+    let Baz = React.createClass({
+      propTypes: {
+        name: React.PropTypes.string,
+        greeting: React.PropTypes.string
+      },
+
+      getDefaultProps () {
+        return { baz: 456, greeting: "hello" };
+      },
+
+      render () {
+        return <span>{this.props.name}</span>;
+      }
+    });
+
+    expect(decompile(withoutDefaultProps(<Bar/>))).toBe('<Bar />');
+    expect(decompile(withoutDefaultProps(<Bar baz={456}/>))).toBe('<Bar />');
+    expect(decompile(withoutDefaultProps(<Bar baz={123}/>))).toBe('<Bar baz={123} />');
+    expect(decompile(withoutDefaultProps(<Bar baz={123} foo={<Baz name="Bob" greeting="hello" />} />))).toBe('<Bar baz={123} foo={<Baz name="Bob" />} />');
   });
 });

@@ -20,6 +20,10 @@ var _objectAssign = require('object-assign');
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
+var _removeDefaultProps = require('./remove-default-props');
+
+var _removeDefaultProps2 = _interopRequireDefault(_removeDefaultProps);
+
 var getProps = function getProps(component) {
   return (0, _objectAssign2['default'])((0, _objectAssign2['default'])(getAttribute('key', component), getAttribute('ref', component)), component.props);
 };
@@ -109,6 +113,9 @@ var decompile = stringifyItems;
 
 exports.decompile = decompile;
 var formatted = function formatted(items) {
-  return (0, _jsBeautify.html)(stringifyItems(items), { indent_size: 2 });
+  return (0, _jsBeautify.html)(decompile(items), { indent_size: 2 });
 };
+
 exports.formatted = formatted;
+var withoutDefaultProps = _removeDefaultProps2['default'];
+exports.withoutDefaultProps = withoutDefaultProps;

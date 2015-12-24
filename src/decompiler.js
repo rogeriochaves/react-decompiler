@@ -2,6 +2,7 @@ import {isElement as isReact} from 'react-addons-test-utils';
 import {html as htmlBeautify} from 'js-beautify';
 import stringifyObject from './stringify-object';
 import merge from 'object-assign';
+import removeDefaultProps from './remove-default-props';
 
 const getProps = component =>
   merge(
@@ -51,7 +52,7 @@ const stringifyComponent = component =>
   getChildren(component) ? stringifyComposedComponent(component) : stringifySimpleComponent(component);
 
 const stringifyFunction = value =>
-  value.toString().replace(/ {[\s\S]*/, '{ ... }')
+  value.toString().replace(/ {[\s\S]*/, '{ ... }');
 
 const stringifyValue = value => {
   switch (typeof value) {
@@ -70,4 +71,6 @@ const stringifyItems = components =>
 
 export const decompile = stringifyItems;
 
-export const formatted = (items) => htmlBeautify(stringifyItems(items), { indent_size: 2 });
+export const formatted = (items) => htmlBeautify(decompile(items), { indent_size: 2 });
+
+export const withoutDefaultProps = removeDefaultProps;
